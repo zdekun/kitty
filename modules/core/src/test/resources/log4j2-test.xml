@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Properties>
+        <Property name="LOG_HOME">/tmp/Core/logs</Property>
+    </Properties>
+
+    <Appenders>
+        <RollingFile name="core" fileName="${LOG_HOME}/core.log"
+                     filePattern="${LOG_HOME}/$${date:yyyy-MM}/core-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+        <RollingFile name="root" fileName="${LOG_HOME}/root.log"
+                     filePattern="${LOG_HOME}/$${date:yyyy-MM}/root-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Logger name="io.kitty" additivity="false" level="INFO">
+            <AppenderRef ref="core"/>
+        </Logger>
+        <Root>
+            <AppenderRef ref="root"/>
+        </Root>
+    </Loggers>
+</Configuration>
