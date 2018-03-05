@@ -1,4 +1,4 @@
-package io.kitty.client;
+package io.kitty;
 
 public class Person {
     private long id;

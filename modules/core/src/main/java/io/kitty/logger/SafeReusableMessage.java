@@ -53,7 +53,7 @@ public class SafeReusableMessage implements ReusableMessage {
     public Throwable getThrowable() {
         Throwable e = decoratingReusableMessage.getThrowable();
         if (DesensitizerException.isSensitive(e)) {
-            //防止异常泄露敏感信息
+            // 防止异常泄露敏感信息
             return new DesensitizerException(e);
         }
         return e;
