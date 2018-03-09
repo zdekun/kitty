@@ -15,7 +15,7 @@ public class ClassUtil {
      *
      * @return 所有成员字段
      */
-    public static List<Field> getAllDeclaredFields(Class<?> clazz) {
+    public static List<Field> getAllInstanceFields(Class<?> clazz) {
         List<Field> fields = new ArrayList<>();
         while (clazz != null) {
             for (final Field field : clazz.getDeclaredFields()) {
