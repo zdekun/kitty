@@ -1,9 +1,6 @@
 package io.kitty.client;
 
-import io.kitty.client.AsyncCallback;
-import io.kitty.client.HttpEntity;
-import io.kitty.client.ResponseEntity;
-import io.kitty.client.TypeReference;
+import io.kitty.domain.Person;
 import io.kitty.client.impl.spring.HttpRestful;
 import org.junit.After;
 import org.junit.Assert;
