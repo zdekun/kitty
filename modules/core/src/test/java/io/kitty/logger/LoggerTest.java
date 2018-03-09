@@ -9,4 +9,10 @@ public class LoggerTest {
         t.testLog("zhangdekun\r\nxiaoyufeng", 35);
     }
 
+    @Test
+    public void testMDC() {
+        TestLogger t = new TestLogger();
+        t.testMDC();
+    }
+
 }

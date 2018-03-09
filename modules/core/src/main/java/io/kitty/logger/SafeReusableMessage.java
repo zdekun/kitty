@@ -52,8 +52,12 @@ public class SafeReusableMessage implements ReusableMessage {
     @Override
     public Throwable getThrowable() {
         Throwable e = decoratingReusableMessage.getThrowable();
+        // 防止异常泄露敏感信息，如果e是敏感异常，可以做到脱敏，但是如果cause为敏感异常的话，需要在配置日志配置文件中做替换。
+        // 如果异常为敏感异常的子类，日志配置的方式很难做到穷举
+        // 例如：
+        //  <replace regex="java.io.FileNotFoundException.*|java.net.BindException.*"
+        //  replacement="io.kitty.logger.DesensitizerException: desensitizer"/>
         if (DesensitizerException.isSensitive(e)) {
-            // 防止异常泄露敏感信息
             return new DesensitizerException(e);
         }
         return e;

@@ -7,7 +7,14 @@
     <Appenders>
         <RollingFile name="core" fileName="${LOG_HOME}/core.log"
                      filePattern="${LOG_HOME}/$${date:yyyy-MM}/core-%d{yyyy-MM-dd}-%i.log">
-            <PatternLayout pattern="[%d{HH:mm:ss:SSS}] [%p] - %l - %m%n"/>
+            <PatternLayout pattern="[%d{HH:mm:ss:SSS}] %X %X{old} [%p] - %l - %m%n">
+                <replace
+                        regex="java.io.FileNotFoundException.*|java.net.BindException.*|java.sql.SQLException.*|java.util.ConcurrentModificatonException.*|java.util.MissingResourceException.*|java.security.acl.NotOwnerException.*|javax.naming.InsufficentResourcesException.*|java.util.jar.JarException.*"
+                        replacement="io.kitty.logger.DesensitizerException: desensitizer"/>
+
+                <replace regex="java.io.FileNotFoundException.*|java.net.BindException.*"
+                         replacement="io.kitty.logger.DesensitizerException: desensitizer"/>
+            </PatternLayout>
             <Policies>
                 <TimeBasedTriggeringPolicy/>
                 <SizeBasedTriggeringPolicy size="100 MB"/>

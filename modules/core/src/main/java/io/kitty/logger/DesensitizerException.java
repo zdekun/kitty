@@ -34,24 +34,24 @@ public class DesensitizerException extends Exception {
     public static boolean isSensitive(Throwable e) {
         if (e instanceof FileNotFoundException) {
             return true;
-        } else if (e instanceof JarException) {
-            return true;
-        } else if (e instanceof MissingResourceException) {
-            return true;
-        } else if (e instanceof NotOwnerException) {
-            return true;
-        } else if (e instanceof ConcurrentModificationException) {
-            return true;
-        } else if (e instanceof InsufficientResourcesException) {
+        } else if (e instanceof SQLException) {
             return true;
         } else if (e instanceof BindException) {
             return true;
         } else if (e instanceof OutOfMemoryError) {
             return true;
+        } else if (e instanceof ConcurrentModificationException) {
+            return true;
         } else if (e instanceof StackOverflowError) {
             return true;
+        } else if (e instanceof MissingResourceException) {
+            return true;
+        } else if (e instanceof NotOwnerException) {
+            return true;
+        } else if (e instanceof InsufficientResourcesException) {
+            return true;
         } else {
-            return e instanceof SQLException;
+            return e instanceof JarException;
         }
     }
 }
