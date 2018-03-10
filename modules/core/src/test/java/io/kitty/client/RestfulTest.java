@@ -1,7 +1,7 @@
 package io.kitty.client;
 
-import io.kitty.domain.Person;
 import io.kitty.client.impl.spring.HttpRestful;
+import io.kitty.domain.Person;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;

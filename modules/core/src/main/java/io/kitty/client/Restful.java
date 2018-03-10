@@ -16,80 +16,80 @@ public interface Restful {
     <T> T getForObject(String url, Map<String, String> headers, Class<T> responseType) throws RestfulException;
 
     <T> T getForObject(String url, Map<String, String> headers, Class<T> responseType, Map<String, ?> uriVariables)
-	    throws RestfulException;
+            throws RestfulException;
 
     <T> T getForObject(String url, Map<String, String> headers, Class<T> responseType, Map<String, ?> uriVariables,
-	    long timeout) throws RestfulException;
+                       long timeout) throws RestfulException;
 
     <T> T getForObject(String url, Map<String, String> headers, TypeReference<T> responseType,
-	    Map<String, ?> uriVariables, long timeout) throws RestfulException;
+                       Map<String, ?> uriVariables, long timeout) throws RestfulException;
 
     <T> ResponseEntity<T> getForEntity(String url, Class<T> responseType) throws RestfulException;
 
     <T> ResponseEntity<T> getForEntity(String url, Map<String, String> headers, Class<T> responseType)
-	    throws RestfulException;
+            throws RestfulException;
 
     <T> ResponseEntity<T> getForEntity(String url, Map<String, String> headers, Class<T> responseType,
-	    Map<String, ?> uriVariables) throws RestfulException;
+                                       Map<String, ?> uriVariables) throws RestfulException;
 
     <T> ResponseEntity<T> getForEntity(String url, Map<String, String> headers, Class<T> responseType,
-	    Map<String, ?> uriVariables, long timeout) throws RestfulException;
+                                       Map<String, ?> uriVariables, long timeout) throws RestfulException;
 
     <T> ResponseEntity<T> getForEntity(String url, Map<String, String> headers, TypeReference<T> responseType,
-	    Map<String, ?> uriVariables, long timeout) throws RestfulException;
+                                       Map<String, ?> uriVariables, long timeout) throws RestfulException;
 
     <T> Future<ResponseEntity<T>> asyncGetForEntity(String url, Map<String, String> headers, Class<T> responseType,
-	    Map<String, ?> uriVariables, AsyncCallback<T> callback) throws RestfulException;
+                                                    Map<String, ?> uriVariables, AsyncCallback<T> callback) throws RestfulException;
 
     <T> Future<ResponseEntity<T>> asyncGetForEntity(String url, Map<String, String> headers,
-	    TypeReference<T> responseType, Map<String, ?> uriVariables, AsyncCallback<T> callback)
-		    throws RestfulException;
+                                                    TypeReference<T> responseType, Map<String, ?> uriVariables, AsyncCallback<T> callback)
+            throws RestfulException;
 
     <T> T postForObject(String url, Object request, Class<T> responseType) throws RestfulException;
 
     <T> T postForObject(String url, Object request, Class<T> responseType, Map<String, ?> uriVariables)
-	    throws RestfulException;
+            throws RestfulException;
 
     <T> T postForObject(String url, Object request, Class<T> responseType, Map<String, ?> uriVariables, long timeout)
-	    throws RestfulException;
+            throws RestfulException;
 
     <T> T postForObject(String url, Object request, TypeReference<T> responseType, Map<String, ?> uriVariables,
-	    long timeout) throws RestfulException;
+                        long timeout) throws RestfulException;
 
     <T> ResponseEntity<T> postForEntity(String url, Object request, Class<T> responseType) throws RestfulException;
 
     <T> ResponseEntity<T> postForEntity(String url, Object request, Class<T> responseType, Map<String, ?> uriVariables)
-	    throws RestfulException;
+            throws RestfulException;
 
     <T> ResponseEntity<T> postForEntity(String url, Object request, Class<T> responseType, Map<String, ?> uriVariables,
-	    long timeout) throws RestfulException;
+                                        long timeout) throws RestfulException;
 
     <T> ResponseEntity<T> postForEntity(String url, Object request, TypeReference<T> responseType,
-	    Map<String, ?> uriVariables, long timeout) throws RestfulException;
+                                        Map<String, ?> uriVariables, long timeout) throws RestfulException;
 
     <T> Future<ResponseEntity<T>> asyncPostForEntity(String url, Object request, Class<T> responseType,
-	    Map<String, ?> uriVariables, AsyncCallback<T> callback) throws RestfulException;
+                                                     Map<String, ?> uriVariables, AsyncCallback<T> callback) throws RestfulException;
 
     <T> Future<ResponseEntity<T>> asyncPostForEntity(String url, Object request, TypeReference<T> responseType,
-	    Map<String, ?> uriVariables, AsyncCallback<T> callback) throws RestfulException;
+                                                     Map<String, ?> uriVariables, AsyncCallback<T> callback) throws RestfulException;
 
     <T> ResponseEntity<T> putForEntity(String url, Object request, Class<T> responseType, Map<String, ?> uriVariables,
-	    long timeout) throws RestfulException;
+                                       long timeout) throws RestfulException;
 
     <T> ResponseEntity<T> putForEntity(String url, Object request, TypeReference<T> responseType,
-	    Map<String, ?> uriVariables, long timeout) throws RestfulException;
+                                       Map<String, ?> uriVariables, long timeout) throws RestfulException;
 
     <T> Future<ResponseEntity<T>> asyncPutForEntity(String url, Object request, Class<T> responseType,
-	    Map<String, ?> uriVariables, AsyncCallback<T> callback) throws RestfulException;
+                                                    Map<String, ?> uriVariables, AsyncCallback<T> callback) throws RestfulException;
 
     <T> Future<ResponseEntity<T>> asyncPutForEntity(String url, Object request, TypeReference<T> responseType,
-	    Map<String, ?> uriVariables, AsyncCallback<T> callback) throws RestfulException;
+                                                    Map<String, ?> uriVariables, AsyncCallback<T> callback) throws RestfulException;
 
     ResponseEntity<Void> deleteForEntity(String url, Map<String, String> headers, Map<String, ?> uriVariables,
-	    long timeout) throws RestfulException;
+                                         long timeout) throws RestfulException;
 
     Future<ResponseEntity<Void>> asyncDeleteForEntity(String url, Map<String, String> headers,
-	    Map<String, ?> uriVariables, AsyncCallback<Void> callback) throws RestfulException;
+                                                      Map<String, ?> uriVariables, AsyncCallback<Void> callback) throws RestfulException;
 
     <T, S> ResponseEntity<T> execute(RequestEntity<S> requestEntity, long timeout);
 

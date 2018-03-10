@@ -14,65 +14,65 @@ public class HttpEntity<T> {
     private final T body;
 
     protected HttpEntity() {
-	this(null, null);
+        this(null, null);
     }
 
     public HttpEntity(T body) {
-	this(body, null);
+        this(body, null);
     }
 
     public HttpEntity(Map<String, String> headers) {
-	this(null, headers);
+        this(null, headers);
     }
 
     public HttpEntity(T body, Map<String, String> headers) {
-	if (headers == null) {
-	    headers = EMPTY_HEADERS;
-	}
-	this.body = body;
-	this.headers = headers;
+        if (headers == null) {
+            headers = EMPTY_HEADERS;
+        }
+        this.body = body;
+        this.headers = headers;
     }
 
     public Map<String, String> getHeaders() {
-	return this.headers;
+        return this.headers;
     }
 
     public T getBody() {
-	return this.body;
+        return this.body;
     }
 
     public boolean hasBody() {
-	return (this.body != null);
+        return (this.body != null);
     }
 
     @Override
     public boolean equals(Object o) {
-	if (this == o)
-	    return true;
-	if (o == null || getClass() != o.getClass())
-	    return false;
-	HttpEntity<?> that = (HttpEntity<?>) o;
-	return Objects.equals(headers, that.headers) && Objects.equals(body, that.body);
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        HttpEntity<?> that = (HttpEntity<?>) o;
+        return Objects.equals(headers, that.headers) && Objects.equals(body, that.body);
     }
 
     @Override
     public int hashCode() {
-	return Objects.hash(headers, body);
+        return Objects.hash(headers, body);
     }
 
     @Override
     public String toString() {
-	StringBuilder builder = new StringBuilder("<");
-	if (this.body != null) {
-	    builder.append(this.body);
-	    if (this.headers != null) {
-		builder.append(',');
-	    }
-	}
-	if (this.headers != null) {
-	    builder.append(this.headers);
-	}
-	builder.append('>');
-	return builder.toString();
+        StringBuilder builder = new StringBuilder("<");
+        if (this.body != null) {
+            builder.append(this.body);
+            if (this.headers != null) {
+                builder.append(',');
+            }
+        }
+        if (this.headers != null) {
+            builder.append(this.headers);
+        }
+        builder.append('>');
+        return builder.toString();
     }
 }
