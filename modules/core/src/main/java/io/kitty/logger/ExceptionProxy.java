@@ -94,7 +94,7 @@ public class ExceptionProxy extends Exception {
         }
         for (int i = 0; i < data.length(); i++) {
             if (((i + 1) % maskMod) == 0) {
-                to.append("*");
+                to.append('-');
             } else {
                 to.append(data.charAt(i));
             }
