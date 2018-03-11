@@ -1,6 +1,8 @@
 package io.kitty.client;
 
-public class RestfulException extends RuntimeException {
+import io.kitty.KittyException;
+
+public class RestfulException extends KittyException {
 
     private static final long serialVersionUID = 2719482043431734152L;
 

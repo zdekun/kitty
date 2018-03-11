@@ -1,5 +1,7 @@
 package io.kitty.client;
 
+import io.kitty.util.ToStringUtil;
+
 import java.util.Map;
 import java.util.Objects;
 
@@ -33,20 +35,19 @@ public class ResponseEntity<T> extends HttpEntity<T> {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o)
+    public boolean equals(Object other) {
+        if (this == other)
             return true;
-        if (!(o instanceof ResponseEntity))
+        if (!(other instanceof ResponseEntity))
             return false;
-        if (!super.equals(o))
+        if (!super.equals(other))
             return false;
-        ResponseEntity<?> that = (ResponseEntity<?>) o;
+        ResponseEntity<?> that = (ResponseEntity<?>) other;
         return Objects.equals(status, that.status);
     }
 
     @Override
     public int hashCode() {
-
         return Objects.hash(super.hashCode(), status);
     }
 
@@ -60,13 +61,13 @@ public class ResponseEntity<T> extends HttpEntity<T> {
         T body = getBody();
         Map<String, String> headers = getHeaders();
         if (body != null) {
-            builder.append(body);
+            builder.append(ToStringUtil.toString(body));
             if (headers != null) {
                 builder.append(',');
             }
         }
         if (headers != null) {
-            builder.append(headers);
+            builder.append(ToStringUtil.toString(headers));
         }
         builder.append('>');
         return builder.toString();

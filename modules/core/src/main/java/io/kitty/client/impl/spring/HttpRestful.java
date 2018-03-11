@@ -379,7 +379,7 @@ public class HttpRestful implements Restful {
             String path = requestEntity.getUri().getPath();
             int status = responseEntity.getStatusCodeValue();
             if (logger.isDebugEnabled()) {
-                logger.debug("{} request:{},response:{}", path, requestEntity, responseEntity);
+                logger.debug("{} request:{},response:{}", path, requestEntity, convertResponseEntity(responseEntity));
             }
             logger.info("{} {} response status[{}] cost {}ms.", path, requestEntity.getMethod(), status, (end - begin));
         }

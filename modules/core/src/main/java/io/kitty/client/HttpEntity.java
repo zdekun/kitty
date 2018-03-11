@@ -1,5 +1,7 @@
 package io.kitty.client;
 
+import io.kitty.util.ToStringUtil;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -64,13 +66,13 @@ public class HttpEntity<T> {
     public String toString() {
         StringBuilder builder = new StringBuilder("<");
         if (this.body != null) {
-            builder.append(this.body);
+            builder.append(ToStringUtil.toString(this.body));
             if (this.headers != null) {
                 builder.append(',');
             }
         }
         if (this.headers != null) {
-            builder.append(this.headers);
+            builder.append(ToStringUtil.toString(this.headers));
         }
         builder.append('>');
         return builder.toString();

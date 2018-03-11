@@ -1,5 +1,7 @@
 package io.kitty.client;
 
+import io.kitty.util.ToStringUtil;
+
 import java.lang.reflect.Type;
 import java.net.URI;
 import java.util.Map;
@@ -80,18 +82,18 @@ public class RequestEntity<T> extends HttpEntity<T> {
         StringBuilder builder = new StringBuilder("<");
         builder.append(getMethod());
         builder.append(' ');
-        builder.append(getUri());
+        builder.append(getUri().getPath());
         builder.append(',');
         T body = getBody();
         Map<String, String> headers = getHeaders();
         if (body != null) {
-            builder.append(body);
+            builder.append(ToStringUtil.toString(body));
             if (headers != null) {
                 builder.append(',');
             }
         }
         if (headers != null) {
-            builder.append(headers);
+            builder.append(ToStringUtil.toString(headers));
         }
         builder.append('>');
         return builder.toString();
