@@ -1,7 +1,10 @@
 package io.kitty.domain;
 
+import io.kitty.annotation.Sensitizer;
+
 public class Person {
     private long id;
+    @Sensitizer
     private String name;
     private int age;
     private int def;

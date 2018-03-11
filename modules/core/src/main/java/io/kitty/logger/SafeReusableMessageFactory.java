@@ -11,7 +11,7 @@ import java.io.Serializable;
 /**
  * ReusableMessageFactory装饰者.
  * <p>
- * 基于被装饰的对象，发挥安全增强的ReusableMessage对象.
+ * 基于被装饰的对象，生成安全增强的ReusableMessage对象.
  * </p>
  */
 @PerformanceSensitive("allocation")
