@@ -8,8 +8,8 @@ import java.util.Objects;
 
 public class HttpEntity<T> {
 
-    public static final HttpEntity<?> EMPTY = new HttpEntity<Object>();
-    public static final Map<String, String> EMPTY_HEADERS = new HashMap<String, String>(0);
+    public static final HttpEntity<?> EMPTY = new HttpEntity<>();
+    public static final Map<String, String> EMPTY_HEADERS = new HashMap<>(0);
 
     private final Map<String, String> headers;
 

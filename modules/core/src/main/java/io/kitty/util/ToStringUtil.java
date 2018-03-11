@@ -17,7 +17,7 @@ import java.util.concurrent.ConcurrentMap;
 
 public class ToStringUtil {
     private static final ConcurrentMap<Class<?>, List<FieldWrapper>> CLASS_FIELDS_CACHE =
-            new ConcurrentReferenceHashMap<Class<?>, List<FieldWrapper>>(256);
+            new ConcurrentReferenceHashMap<>(256);
 
     public static String toString(Object obj) {
         StringBuilder buffer = new StringBuilder();
@@ -30,7 +30,9 @@ public class ToStringUtil {
             return;
         }
         Class<?> clazz = obj.getClass();
-        if (obj instanceof Map) {
+        if (isFrequentlyClass(clazz)) {
+            buffer.append(String.valueOf(obj));
+        } else if (obj instanceof Map) {
             Map data = (Map) obj;
             toStringMap(data, buffer);
         } else if (obj instanceof Collection) {
@@ -39,8 +41,6 @@ public class ToStringUtil {
         } else if (clazz.isArray()) {
             List data = array2List(obj);
             toStringCollection(data, buffer);
-        } else if (isFrequentlyClass(clazz)) {
-            buffer.append(String.valueOf(obj));
         } else {
             toStringDomain(obj, buffer);
         }

@@ -28,7 +28,7 @@ import java.util.concurrent.TimeoutException;
 
 public class HttpRestful implements Restful {
     private static final Logger logger = LoggerFactory.getLogger(HttpRestful.class);
-    private static final Map<String, String> EMPTY = new HashMap<String, String>(0);
+    private static final Map<String, String> EMPTY = new HashMap<>(0);
 
     private long timeout = 500L;
     private AsyncRestTemplate asyncRestTemplate;
@@ -247,7 +247,7 @@ public class HttpRestful implements Restful {
         long begin = System.currentTimeMillis();
         URI uri = requestEntity.getUri();
         String method = requestEntity.getMethod();
-        ListenableFutureCallback<org.springframework.http.ResponseEntity<T>> recordResponseInfoCallback = new RecordResponseInfoCallback<T, S>(
+        ListenableFutureCallback<org.springframework.http.ResponseEntity<T>> recordResponseInfoCallback = new RecordResponseInfoCallback<>(
                 begin, requestEntity);
         try {
             org.springframework.http.HttpEntity<?> httpEntity = convertRequestEntity(requestEntity);
@@ -276,7 +276,7 @@ public class HttpRestful implements Restful {
         long begin = System.currentTimeMillis();
         URI uri = requestEntity.getUri();
         String method = requestEntity.getMethod();
-        ListenableFutureCallback<org.springframework.http.ResponseEntity<T>> futureCallbackAdapter = new ListenableFutureCallbackAdapter<T, S>(
+        ListenableFutureCallback<org.springframework.http.ResponseEntity<T>> futureCallbackAdapter = new ListenableFutureCallbackAdapter<>(
                 begin, requestEntity, callback);
 
         try {
@@ -285,7 +285,7 @@ public class HttpRestful implements Restful {
                     .exchange(uri, HttpMethod.resolve(method), httpEntity,
                             ParameterizedTypeReference.forType(requestEntity.getType()));
             responseEntityFuture.addCallback(futureCallbackAdapter);
-            return new FutureAdapter<T>(responseEntityFuture);
+            return new FutureAdapter<>(responseEntityFuture);
         } catch (RestClientException e) {
             throw new RestfulException(e.getMessage(), e);
         }
@@ -327,7 +327,7 @@ public class HttpRestful implements Restful {
             uriVariables = EMPTY;
         }
         URI uri = getAsyncRestTemplate().getUriTemplateHandler().expand(url, uriVariables);
-        return new RequestEntity<S>(body, headers, method.name(), uri, responseType);
+        return new RequestEntity<>(body, headers, method.name(), uri, responseType);
     }
 
     private <T, S> RequestEntity<S> assembleRequestEntity(String url, HttpMethod method, Map<String, String> headers,
@@ -336,7 +336,7 @@ public class HttpRestful implements Restful {
             uriVariables = EMPTY;
         }
         URI uri = getAsyncRestTemplate().getUriTemplateHandler().expand(url, uriVariables);
-        return new RequestEntity<S>(body, headers, method.name(), uri,
+        return new RequestEntity<>(body, headers, method.name(), uri,
                 responseType.getRawType());
     }
 
@@ -344,7 +344,7 @@ public class HttpRestful implements Restful {
     private static <S> org.springframework.http.HttpEntity<?> convertRequestEntity(RequestEntity<S> request) {
         Map<String, String> headers = request.getHeaders();
         if (headers != null) {
-            MultiValueMap<String, String> multiValueMap = new LinkedMultiValueMap<String, String>();
+            MultiValueMap<String, String> multiValueMap = new LinkedMultiValueMap<>();
             multiValueMap.setAll(headers);
             return (org.springframework.http.HttpEntity<?>) new org.springframework.http.HttpEntity(
                     request.getBody(), multiValueMap);
@@ -360,7 +360,7 @@ public class HttpRestful implements Restful {
         ResponseEntity.HttpStatus status = new ResponseEntity.HttpStatus(springResponseEntity.getStatusCode().value(),
                 springResponseEntity.getStatusCode().getReasonPhrase());
 
-        return new ResponseEntity<T>(body, headers, status);
+        return new ResponseEntity<>(body, headers, status);
     }
 
     private static class RecordResponseInfoCallback<T, S>
