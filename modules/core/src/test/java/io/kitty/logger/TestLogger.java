@@ -10,10 +10,10 @@ public class TestLogger {
     private static final Logger logger = LoggerFactory.getLogger(TestLogger.class);
 
     public void testLog(String name, int age) {
-//        RuntimeException e1 = new RuntimeException("123runtime321");
+        RuntimeException e1 = new RuntimeException("123runtime321");
         FileNotFoundException e = new FileNotFoundException("xxxx");
         RuntimeException e2 = new RuntimeException("123runtime321", e);
-
+        e2.addSuppressed(e1);
         logger.error("test name:{},age:{}", name, age, e2);
     }
 

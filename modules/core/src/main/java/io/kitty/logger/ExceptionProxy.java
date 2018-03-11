@@ -19,6 +19,14 @@ public class ExceptionProxy extends Exception {
     public ExceptionProxy(String msg, Throwable proxy) {
         super(msg);
         this.proxy = proxy;
+        processProxyThrowable(proxy);
+    }
+
+    private void processProxyThrowable(Throwable proxy) {
+        Throwable[] suppressedExceptions = proxy.getSuppressed();
+        for (Throwable suppressedException : suppressedExceptions) {
+            addSuppressed(new ExceptionProxy(desensitizeClassNameAndMessage(suppressedException), suppressedException));
+        }
         setStackTrace(proxy.getStackTrace());
     }
 
@@ -94,7 +102,7 @@ public class ExceptionProxy extends Exception {
         }
         for (int i = 0; i < data.length(); i++) {
             if (((i + 1) % maskMod) == 0) {
-                to.append('-');
+                to.append('*');
             } else {
                 to.append(data.charAt(i));
             }

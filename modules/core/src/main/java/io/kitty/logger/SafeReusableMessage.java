@@ -63,7 +63,7 @@ public class SafeReusableMessage implements ReusableMessage {
             char value = buffer.charAt(i);
             // 防日志伪造攻击
             if (value == '\r' || value == '\n') {
-                buffer.setCharAt(i, '-');
+                buffer.setCharAt(i, '*');
             }
         }
     }
