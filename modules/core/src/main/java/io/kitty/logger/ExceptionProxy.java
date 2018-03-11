@@ -36,7 +36,7 @@ public class ExceptionProxy extends Exception {
         if (cause != null) {
             return new ExceptionProxy(desensitizeClassNameAndMessage(cause), cause);
         }
-        return cause;
+        return null;
     }
 
     /**

@@ -16,7 +16,8 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentMap;
 
 public class ToStringUtil {
-    private static final ConcurrentMap<Class<?>, List<FieldWrapper>> CLASS_FIELDS_CACHE = new ConcurrentReferenceHashMap<Class<?>, List<FieldWrapper>>(256);
+    private static final ConcurrentMap<Class<?>, List<FieldWrapper>> CLASS_FIELDS_CACHE =
+            new ConcurrentReferenceHashMap<Class<?>, List<FieldWrapper>>(256);
 
     public static String toString(Object obj) {
         StringBuilder buffer = new StringBuilder();
@@ -41,7 +42,7 @@ public class ToStringUtil {
         } else if (isFrequentlyClass(clazz)) {
             buffer.append(String.valueOf(obj));
         } else {
-            toStringPojo(obj, buffer);
+            toStringDomain(obj, buffer);
         }
     }
 
@@ -66,13 +67,14 @@ public class ToStringUtil {
             buffer.append('=');
             toString(value, buffer);
             if (!i.hasNext()) {
-                buffer.append('}').toString();
+                buffer.append('}');
                 return;
             }
             buffer.append(',').append(' ');
         }
     }
 
+    @SuppressWarnings("unchecked")
     private static List sortedCollection(Collection<?> data) {
         List sorted = new ArrayList();
         for (Object o : data) {
@@ -85,10 +87,11 @@ public class ToStringUtil {
     }
 
     // Collection中的对象必须实现Comparable接口
+    @SuppressWarnings("unchecked")
     private static void toStringCollection(Collection<?> data, StringBuilder buffer) {
-        List sortedDatas = sortedCollection(data);
+        List sortedData = sortedCollection(data);
 
-        Iterator<Object> it = sortedDatas.iterator();
+        Iterator<Object> it = sortedData.iterator();
         if (!it.hasNext()) {
             buffer.append("[]");
             return;
@@ -102,13 +105,14 @@ public class ToStringUtil {
             }
             toString(value, buffer);
             if (!it.hasNext()) {
-                buffer.append(']').toString();
+                buffer.append(']');
                 return;
             }
             buffer.append(',').append(' ');
         }
     }
 
+    @SuppressWarnings("unchecked")
     private static List array2List(Object array) {
         int length = Array.getLength(array);
         if (length == 0) {
@@ -138,13 +142,12 @@ public class ToStringUtil {
             return true;
         } else if (clazz == Double.class || clazz == double.class) {
             return true;
-        } else if (clazz == String.class) {
-            return true;
+        } else {
+            return clazz == String.class;
         }
-        return false;
     }
 
-    private static void toStringPojo(Object obj, StringBuilder buffer) {
+    private static void toStringDomain(Object obj, StringBuilder buffer) {
         Class<?> clazz = obj.getClass();
         List<FieldWrapper> fields = sortedInstanceFields(clazz);
         for (FieldWrapper fieldWrapper : fields) {
