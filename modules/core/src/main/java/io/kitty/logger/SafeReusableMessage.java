@@ -51,8 +51,7 @@ public class SafeReusableMessage implements ReusableMessage {
 
     @Override
     public Throwable getThrowable() {
-        Throwable e = decoratingReusableMessage.getThrowable();
-        return new ExceptionProxy(ExceptionProxy.desensitizeClassNameAndMessage(e), e);
+        return decoratingReusableMessage.getThrowable();
     }
 
     @Override
